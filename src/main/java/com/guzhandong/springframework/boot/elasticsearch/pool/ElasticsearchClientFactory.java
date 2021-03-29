@@ -8,6 +8,7 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -86,7 +87,7 @@ public class ElasticsearchClientFactory implements PooledObjectFactory<RestHighL
     public void destroyObject(PooledObject<RestHighLevelClient> p) throws Exception {
         if (p.getObject()!=null) {
             try {
-                if (p.getObject().ping()) {
+                if (p.getObject().ping(RequestOptions.DEFAULT)) {
                     p.getObject().close();
                 }
             } catch (IOException e) {
@@ -99,7 +100,7 @@ public class ElasticsearchClientFactory implements PooledObjectFactory<RestHighL
     @Override
     public boolean validateObject(PooledObject<RestHighLevelClient> p) {
         try {
-            if (p.getObject()!=null && p.getObject().ping()) {
+            if (p.getObject()!=null && p.getObject().ping(RequestOptions.DEFAULT)) {
                 return true;
             }
         } catch (IOException e) {
@@ -112,7 +113,7 @@ public class ElasticsearchClientFactory implements PooledObjectFactory<RestHighL
     public void activateObject(PooledObject<RestHighLevelClient> p) throws Exception {
         boolean result =false;
         try {
-            result = p.getObject().ping();
+            result = p.getObject().ping(RequestOptions.DEFAULT);
         } catch (IOException e) {
             logUtil.debug("http pool active client ,ping result :{}",result);
         }

@@ -20,6 +20,7 @@ import org.elasticsearch.action.search.*;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.IndicesClient;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 
 import java.io.IOException;
@@ -165,8 +166,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html">Bulk API on elastic.co</a>
      */
-    public final BulkResponse bulk(BulkRequest bulkRequest, Header... headers) throws IOException {
-        return (BulkResponse)exec((r)->r.bulk(bulkRequest,headers));
+    public final BulkResponse bulk(BulkRequest bulkRequest, RequestOptions options) throws IOException {
+        return (BulkResponse)exec((r)->r.bulk(bulkRequest,options));
     }
 
     /**
@@ -174,22 +175,22 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html">Bulk API on elastic.co</a>
      */
-    public final void bulkAsync(BulkRequest bulkRequest, ActionListener<BulkResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.bulkAsync(bulkRequest,listener,headers),false);
+    public final void bulkAsync(BulkRequest bulkRequest, RequestOptions options, ActionListener<BulkResponse> listener) {
+        execReturnVoid((r)->r.bulkAsync(bulkRequest,options,listener),false);
     }
 
     /**
      * Pings the remote Elasticsearch cluster and returns true if the ping succeeded, false otherwise
      */
-    public final boolean ping(Header... headers) throws IOException {
-        return (Boolean) exec((r)->r.ping(headers));
+    public final boolean ping(RequestOptions options) throws IOException {
+        return (Boolean) exec((r)->r.ping(options));
     }
 
     /**
      * Get the cluster info otherwise provided when sending an HTTP request to port 9200
      */
-    public final MainResponse info(Header... headers) throws IOException {
-        return (MainResponse)exec((r)->r.info(headers));
+    public final MainResponse info(RequestOptions options) throws IOException {
+        return (MainResponse)exec((r)->r.info(options));
     }
 
     /**
@@ -197,8 +198,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html">Get API on elastic.co</a>
      */
-    public final GetResponse get(GetRequest getRequest, Header... headers) throws IOException {
-        return (GetResponse)exec((r)->r.get(getRequest,headers));
+    public final GetResponse get(GetRequest getRequest, RequestOptions options) throws IOException {
+        return (GetResponse)exec((r)->r.get(getRequest,options));
     }
 
     /**
@@ -206,8 +207,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html">Get API on elastic.co</a>
      */
-    public final void getAsync(GetRequest getRequest, ActionListener<GetResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.getAsync(getRequest,listener,headers),false);
+    public final void getAsync(GetRequest getRequest, ActionListener<GetResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.getAsync(getRequest,options,listener),false);
     }
 
     /**
@@ -215,8 +216,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html">Multi Get API on elastic.co</a>
      */
-    public final MultiGetResponse multiGet(MultiGetRequest multiGetRequest, Header... headers) throws IOException {
-        return (MultiGetResponse)exec((r)->r.multiGet(multiGetRequest,headers));
+    public final MultiGetResponse multiGet(MultiGetRequest multiGetRequest, RequestOptions options) throws IOException {
+        return (MultiGetResponse)exec((r)->r.multiGet(multiGetRequest,options));
     }
 
     /**
@@ -224,8 +225,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-multi-get.html">Multi Get API on elastic.co</a>
      */
-    public void multiGetAsync(MultiGetRequest multiGetRequest, ActionListener<MultiGetResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.multiGetAsync(multiGetRequest,listener,headers),false);
+    public void multiGetAsync(MultiGetRequest multiGetRequest, ActionListener<MultiGetResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.multiGetAsync(multiGetRequest,options,listener),false);
     }
 
     /**
@@ -233,8 +234,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html">Get API on elastic.co</a>
      */
-    public final boolean exists(GetRequest getRequest, Header... headers) throws IOException {
-        return (Boolean) exec((r)->r.exists(getRequest,headers));
+    public final boolean exists(GetRequest getRequest, RequestOptions options) throws IOException {
+        return (Boolean) exec((r)->r.exists(getRequest,options));
     }
 
     /**
@@ -242,8 +243,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html">Get API on elastic.co</a>
      */
-    public final void existsAsync(GetRequest getRequest, ActionListener<Boolean> listener, Header... headers) {
-        execReturnVoid((r)->r.existsAsync(getRequest,listener,headers),false);
+    public final void existsAsync(GetRequest getRequest, ActionListener<Boolean> listener, RequestOptions options) {
+        execReturnVoid((r)->r.existsAsync(getRequest,options,listener),false);
     }
 
     /**
@@ -251,8 +252,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html">Index API on elastic.co</a>
      */
-    public final IndexResponse index(IndexRequest indexRequest, Header... headers) throws IOException {
-        return (IndexResponse)exec((r)->r.index(indexRequest,headers));
+    public final IndexResponse index(IndexRequest indexRequest, RequestOptions options) throws IOException {
+        return (IndexResponse)exec((r)->r.index(indexRequest,options));
     }
 
     /**
@@ -260,8 +261,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html">Index API on elastic.co</a>
      */
-    public final void indexAsync(IndexRequest indexRequest, ActionListener<IndexResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.indexAsync(indexRequest,listener,headers),false);
+    public final void indexAsync(IndexRequest indexRequest, ActionListener<IndexResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.indexAsync(indexRequest,options,listener),false);
     }
 
     /**
@@ -269,8 +270,8 @@ public class RestHighLevelClient {
      * <p>
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html">Update API on elastic.co</a>
      */
-    public final UpdateResponse update(UpdateRequest updateRequest, Header... headers) throws IOException {
-        return (UpdateResponse)exec((r)->r.update(updateRequest,headers));
+    public final UpdateResponse update(UpdateRequest updateRequest, RequestOptions options) throws IOException {
+        return (UpdateResponse)exec((r)->r.update(updateRequest,options));
     }
 
     /**
@@ -278,8 +279,8 @@ public class RestHighLevelClient {
      * <p>
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html">Update API on elastic.co</a>
      */
-    public final void updateAsync(UpdateRequest updateRequest, ActionListener<UpdateResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.update(updateRequest,headers),false);
+    public final void updateAsync(UpdateRequest updateRequest, ActionListener<UpdateResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.update(updateRequest,options),false);
     }
 
     /**
@@ -287,8 +288,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html">Delete API on elastic.co</a>
      */
-    public final DeleteResponse delete(DeleteRequest deleteRequest, Header... headers) throws IOException {
-        return (DeleteResponse)exec((r)->r.delete(deleteRequest,headers));
+    public final DeleteResponse delete(DeleteRequest deleteRequest, RequestOptions options) throws IOException {
+        return (DeleteResponse)exec((r)->r.delete(deleteRequest,options));
     }
 
     /**
@@ -296,8 +297,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html">Delete API on elastic.co</a>
      */
-    public final void deleteAsync(DeleteRequest deleteRequest, ActionListener<DeleteResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.deleteAsync(deleteRequest,listener,headers),false);
+    public final void deleteAsync(DeleteRequest deleteRequest, ActionListener<DeleteResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.deleteAsync(deleteRequest,options,listener),false);
     }
 
     /**
@@ -305,8 +306,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html">Search API on elastic.co</a>
      */
-    public final SearchResponse search(SearchRequest searchRequest, Header... headers) throws IOException {
-        return (SearchResponse)exec((r)->r.search(searchRequest,headers));
+    public final SearchResponse search(SearchRequest searchRequest, RequestOptions options) throws IOException {
+        return (SearchResponse)exec((r)->r.search(searchRequest,options));
     }
 
     /**
@@ -314,8 +315,8 @@ public class RestHighLevelClient {
      *
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html">Search API on elastic.co</a>
      */
-    public final void searchAsync(SearchRequest searchRequest, ActionListener<SearchResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.searchAsync(searchRequest,listener,headers),false);
+    public final void searchAsync(SearchRequest searchRequest, ActionListener<SearchResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.searchAsync(searchRequest,options,listener),false);
     }
 
     /**
@@ -324,8 +325,8 @@ public class RestHighLevelClient {
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Multi search API on
      * elastic.co</a>
      */
-    public final MultiSearchResponse multiSearch(MultiSearchRequest multiSearchRequest, Header... headers) throws IOException {
-        return (MultiSearchResponse)exec((r)->r.multiSearch(multiSearchRequest,headers));
+    public final MultiSearchResponse multiSearch(MultiSearchRequest multiSearchRequest, RequestOptions options) throws IOException {
+        return (MultiSearchResponse)exec((r)->r.multiSearch(multiSearchRequest,options));
     }
 
     /**
@@ -334,8 +335,8 @@ public class RestHighLevelClient {
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Multi search API on
      * elastic.co</a>
      */
-    public final void multiSearchAsync(MultiSearchRequest searchRequest, ActionListener<MultiSearchResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.multiSearchAsync(searchRequest, listener,headers),false);
+    public final void multiSearchAsync(MultiSearchRequest searchRequest, ActionListener<MultiSearchResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.multiSearchAsync(searchRequest,options,listener),false);
     }
 
     /**
@@ -344,8 +345,8 @@ public class RestHighLevelClient {
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">Search Scroll
      * API on elastic.co</a>
      */
-    public final SearchResponse searchScroll(SearchScrollRequest searchScrollRequest, Header... headers) throws IOException {
-        return (SearchResponse)exec((r)->r.searchScroll(searchScrollRequest,headers));
+    public final SearchResponse searchScroll(SearchScrollRequest searchScrollRequest, RequestOptions options) throws IOException {
+        return (SearchResponse)exec((r)->r.searchScroll(searchScrollRequest,options));
     }
 
     /**
@@ -355,8 +356,8 @@ public class RestHighLevelClient {
      * API on elastic.co</a>
      */
     public final void searchScrollAsync(SearchScrollRequest searchScrollRequest,
-                                        ActionListener<SearchResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.searchScrollAsync(searchScrollRequest,listener,headers),false);
+                                        ActionListener<SearchResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.searchScrollAsync(searchScrollRequest,options,listener),false);
     }
 
     /**
@@ -365,8 +366,8 @@ public class RestHighLevelClient {
      * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html#_clear_scroll_api">
      * Clear Scroll API on elastic.co</a>
      */
-    public final ClearScrollResponse clearScroll(ClearScrollRequest clearScrollRequest, Header... headers) throws IOException {
-        return (ClearScrollResponse)exec((r)->r.clearScroll(clearScrollRequest,headers));
+    public final ClearScrollResponse clearScroll(ClearScrollRequest clearScrollRequest, RequestOptions options) throws IOException {
+        return (ClearScrollResponse)exec((r)->r.clearScroll(clearScrollRequest,options));
     }
 
     /**
@@ -376,8 +377,8 @@ public class RestHighLevelClient {
      * Clear Scroll API on elastic.co</a>
      */
     public final void clearScrollAsync(ClearScrollRequest clearScrollRequest,
-                                       ActionListener<ClearScrollResponse> listener, Header... headers) {
-        execReturnVoid((r)->r.clearScrollAsync(clearScrollRequest,listener,headers),false);
+                                       ActionListener<ClearScrollResponse> listener, RequestOptions options) {
+        execReturnVoid((r)->r.clearScrollAsync(clearScrollRequest,options,listener),false);
     }
 
 

@@ -6,6 +6,7 @@ import com.guzhandong.springframework.boot.elasticsearch.pool.ElasticsearchClien
 import com.guzhandong.springframework.boot.elasticsearch.pool.ElasticsearchClientPool;
 import com.guzhandong.springframework.boot.elasticsearch.pool.ElasticsearchClientPoolConfigure;
 import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.elasticsearch.client.RequestOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +88,8 @@ public class HighLevelClientAutoConfigure {
      */
     public void poolConnectionInit(RestHighLevelClient restHighLevelClient) {
         try {
-            boolean pingRes = restHighLevelClient.ping();
+        	
+            boolean pingRes = restHighLevelClient.ping(RequestOptions.DEFAULT);
             if (pingRes) {
                 LOGGER.info("elasticsearch pool connection init ,ping result :{}",pingRes);
             } else {

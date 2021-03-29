@@ -1,5 +1,7 @@
 package com.guzhandong.springframework.boot.elasticsearch.pool;
 
+import org.elasticsearch.client.RequestOptions;
+
 import com.guzhandong.springframework.boot.elasticsearch.client.ElasticsearchClientConfigure;
 import com.guzhandong.springframework.boot.elasticsearch.client.RestHighLevelClient;
 
@@ -28,7 +30,7 @@ public class RemoteExecConnectionFactoryTest {
         RestHighLevelClient restHighLevelClient = new RestHighLevelClient(op);
         System.out.println("created connection count : "+ op.getCreatedCount());
 
-        System.out.println(restHighLevelClient.ping());
+        System.out.println(restHighLevelClient.ping(RequestOptions.DEFAULT));
 
         System.out.println("main thread complate");
         op.destroy();
